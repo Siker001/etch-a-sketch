@@ -1,0 +1,41 @@
+/* * {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+
+
+
+.wrapper {
+	min-height: 100%;
+	margin: 0 auto -20px; /* the bottom margin is the negative value of the footer's height */
+/*}
+*/
+.center{
+	margin: 0 auto;
+	text-align: center;
+	max-width: 920px;
+	padding: 1%;
+}
+
+.container{
+	height: 500px;
+	width: 500px;
+}
+
+.grid{
+	border-color: black;
+	width: 31.25px;
+	height: 31.25px;
+	
+}
+
+.colored{
+	background-color: black;
+}
+
+/*footer, .push {
+	height: 20px; /* '.push' must be the same height as 'footer' */
+/*} 
+*/
