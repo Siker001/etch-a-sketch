@@ -1,26 +1,30 @@
 $(document).ready(function(){
 	var n = 16;
 	
-	
 	function createGrid(){
 		var side = 500/n;
 		var sidePx = side + "px";
 		var totalGrid = n*n;
-		if (n>0 && n<101) {
-			for (var i = totalGrid - 1; i >= 0; i--) {
-				$('.container').append('<div class="grid"></div>');
-			};
-			$('.grid').css({"width": sidePx, "height": sidePx});
-		} else {
-			alert("Please give me a number between 1 and 100. Try again.");
-			resetBtnClick();
-		}
+		
+		for (var i = totalGrid - 1; i >= 0; i--) {
+			$('.container').append('<div class="grid"></div>');
+		};
+		$('.grid').css({"width": sidePx, "height": sidePx});
+		hover();
 	}
 
 	function resetBtnClick(){
 		$('#resetBtn').on('click', function(){
 			n = prompt("How many squares would you like in 1 side? You can choose maximum 100.");
-			createGrid();
+			if ( n > 0 && n < 101 ) {
+				$('.grid').remove();
+				createGrid();
+			} else {
+				do {
+					n = prompt("That was not between 1 and 100. Please give me a number between 1 and 100. Try again.");
+				} while ( n < 1 || n > 100 );
+				createGrid();
+			}
 		});
 	}
 
@@ -35,22 +39,30 @@ $(document).ready(function(){
 			var c = getRandomInt(0,255);
 			var rgb = 'rgb(' + a + ',' + b + ',' + c + ')';
 			console.log(rgb);
-			$('.colored').css({"background-color": rgb});
-			hover();
-			// When clicked, it canges every element with colored class, we want only those which are hovered over after the click.
+			$('.container').on('mouseenter', '.grid', function(){
+				$(this).css({"background-color": rgb});
+			});
 		});
 	}
 
-	resetBtnClick();
-	colorBtnClick();
-	
+	function blackBtnClick(){
+		$('#blackBtn').on('click', function(){
+			hover();
+		});
+	}
+
 	function hover(){
+		var rgb = 'rgb(0,0,0)';
 		$('.container').on('mouseenter', '.grid', function(){
-				$(this).addClass('colored');
+				$(this).css({"background-color": rgb});
 		});
 	}
 	
-	hover();
+	createGrid();
+	resetBtnClick();
+	colorBtnClick();
+	blackBtnClick();
+	
 
 
 
